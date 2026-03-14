@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import { Lock, AlertTriangle, ArrowLeft } from "lucide-react";
 
 /**
  * Admin Login Page — simple password-based authentication.
@@ -50,38 +51,38 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-pattern flex items-center justify-center px-4">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 mb-4 shadow-lg shadow-indigo-300/30">
-            <span className="text-3xl">🔒</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded bg-gray-200 mb-4 shadow-sm">
+            <Lock className="w-8 h-8 text-gray-500" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-800">Admin Login</h1>
-          <p className="text-slate-500 text-sm mt-1">Enter your admin password to continue</p>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
+          <p className="text-gray-500 text-sm mt-1">Enter your admin password to continue</p>
         </div>
 
         {/* Login card */}
-        <form onSubmit={handleLogin} className="bg-white rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 p-6">
+        <form onSubmit={handleLogin} className="bg-white rounded border border-gray-200 shadow-sm p-6">
           {/* Password input */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-slate-600 mb-2">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter admin password"
               required
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl 
-                         text-slate-700 placeholder:text-slate-400 text-sm
-                         focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all"
+              className="w-full px-4 py-2 bg-white border border-gray-300 rounded 
+                         text-gray-900 placeholder:text-gray-400 text-sm
+                         focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           {/* Error message */}
           {error && (
-            <div className="mb-4 px-4 py-3 bg-red-50 text-red-600 border border-red-200 rounded-xl text-sm text-center">
-              ⚠️ {error}
+            <div className="mb-4 px-4 py-3 bg-red-50 text-red-700 border border-red-200 rounded text-sm flex items-center justify-center gap-2">
+              <AlertTriangle className="w-4 h-4" /> {error}
             </div>
           )}
 
@@ -89,11 +90,9 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl font-semibold text-sm
-                       bg-gradient-to-r from-indigo-600 to-purple-600 text-white
-                       hover:from-indigo-500 hover:to-purple-500
-                       disabled:opacity-50 transition-all active:scale-[0.98]
-                       shadow-md shadow-indigo-200"
+            className="w-full py-3 rounded font-semibold text-sm
+                       bg-blue-600 text-white hover:bg-blue-700
+                       disabled:opacity-50 transition-colors shadow-sm"
           >
             {loading ? (
               <span className="inline-flex items-center gap-2">
@@ -107,8 +106,8 @@ export default function AdminLoginPage() {
 
           {/* Back link */}
           <div className="mt-4 text-center">
-            <a href="/" className="text-xs text-slate-400 hover:text-indigo-600 transition-colors">
-              ← Back to home
+            <a href="/" className="text-xs text-blue-600 hover:text-blue-800 flex items-center justify-center gap-1 transition-colors">
+              <ArrowLeft className="w-3 h-3" /> Back to home
             </a>
           </div>
         </form>
