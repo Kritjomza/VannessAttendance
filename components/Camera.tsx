@@ -124,10 +124,10 @@ export default function Camera({ onFaceDetected, onFaceRecognized, registeredFac
   const statusColor = faceStatus.type === "success"
     ? "text-green-700 bg-green-50 border-green-200"
     : faceStatus.type === "warning"
-    ? "text-yellow-700 bg-yellow-50 border-yellow-200"
-    : faceStatus.type === "error"
-    ? "text-red-700 bg-red-50 border-red-200"
-    : "text-gray-600 bg-gray-50 border-gray-200";
+      ? "text-yellow-700 bg-yellow-50 border-yellow-200"
+      : faceStatus.type === "error"
+        ? "text-red-700 bg-red-50 border-red-200"
+        : "text-gray-600 bg-gray-50 border-gray-200";
 
   return (
     <div className="flex flex-col items-center gap-3 w-full max-w-sm">
