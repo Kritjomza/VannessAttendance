@@ -84,6 +84,11 @@ function CheckInContent() {
     if (!location) { setMessage({ type: "error", text: "Location not available. Please enable GPS." }); return; }
     if (!user || !settings) { setMessage({ type: "error", text: "Settings not loaded. Please try again." }); return; }
 
+    if (!currentUserHasFace) {
+      setMessage({ type: "error", text: "Face not registered. Please ask admin to register your face first." });
+      return;
+    }
+
     if (hasRegisteredFaces && currentUserHasFace) {
       if (!recognizedUserId) {
         setMessage({ type: "error", text: "Face not recognized. Please look at the camera clearly." });

@@ -371,12 +371,18 @@ function UsersTab() {
 
   const handleFaceRegistered = async (descriptor: number[]) => {
     if (!registeringUser) return;
-    const { error } = await supabase
+    const { error, data } = await supabase
       .from("users")
       .update({ face_descriptor: JSON.stringify(descriptor) })
-      .eq("id", registeringUser.id);
-    if (error) setMessage({ type: "error", text: "Failed to save face data" });
-    else { setMessage({ type: "success", text: `Face registered for "${registeringUser.name}"` }); fetchUsers(); }
+      .eq("id", registeringUser.id)
+      .select();
+      
+    if (error || !data || data.length === 0) {
+      setMessage({ type: "error", text: "Failed to save face data. Ensure RLS UPDATE policy exists." });
+    } else { 
+      setMessage({ type: "success", text: `Face registered for "${registeringUser.name}"` }); 
+      fetchUsers(); 
+    }
     setRegisteringUser(null);
   };
 
